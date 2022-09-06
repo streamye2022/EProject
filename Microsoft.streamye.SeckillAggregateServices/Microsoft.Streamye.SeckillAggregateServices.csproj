@@ -5,4 +5,14 @@
         <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="MicroServices" />
+      <Folder Include="Models" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Microsoft.Streamye.Commons\Microsoft.Streamye.Commons.csproj" />
+      <ProjectReference Include="..\Microsoft.Streamye.Cores\Microsoft.Streamye.Cores.csproj" />
+    </ItemGroup>
+
 </Project>
