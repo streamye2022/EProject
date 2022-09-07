@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Streamye.OrderSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Streamye.SecKillServices", "Microsoft.Streamye.SecKillServices\Microsoft.Streamye.SecKillServices.csproj", "{A8353CE7-9A08-4542-B96F-20B1EAF89295}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Streamye.UnitTests", "Microsoft.Streamye.UnitTests\Microsoft.Streamye.UnitTests.csproj", "{171E9829-EEE0-4D55-8752-D985119D95E8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,7 @@ Global
 		{48613E90-B8C0-4C78-9A07-AAD0990B831D} = {A6A87FBB-9AB4-45F6-865C-D21827523D71}
 		{5E56B84C-8EB2-4EE2-AE91-9EEF46CC15E0} = {A6A87FBB-9AB4-45F6-865C-D21827523D71}
 		{A8353CE7-9A08-4542-B96F-20B1EAF89295} = {A6A87FBB-9AB4-45F6-865C-D21827523D71}
+		{171E9829-EEE0-4D55-8752-D985119D95E8} = {5D7DAD2F-DD32-4BA0-BF3C-190BD837A308}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{42602ABD-3ED0-4435-A8D6-40A3C3D5FB70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -86,5 +89,9 @@ Global
 		{A8353CE7-9A08-4542-B96F-20B1EAF89295}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8353CE7-9A08-4542-B96F-20B1EAF89295}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8353CE7-9A08-4542-B96F-20B1EAF89295}.Release|Any CPU.Build.0 = Release|Any CPU
+		{171E9829-EEE0-4D55-8752-D985119D95E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{171E9829-EEE0-4D55-8752-D985119D95E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{171E9829-EEE0-4D55-8752-D985119D95E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{171E9829-EEE0-4D55-8752-D985119D95E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
