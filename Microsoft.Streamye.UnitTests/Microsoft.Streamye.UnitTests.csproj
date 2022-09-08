@@ -17,4 +17,8 @@
       <Folder Include="Framework.Core" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Microsoft.Streamye.Cores\Microsoft.Streamye.Cores.csproj" />
+    </ItemGroup>
+
 </Project>

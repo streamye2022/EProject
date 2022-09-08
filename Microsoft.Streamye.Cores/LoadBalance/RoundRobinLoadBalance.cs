@@ -9,23 +9,35 @@ namespace Microsoft.Streamye.Cores.LoadBalance
     public class RoundRobinLoadBalance : AbstractLoadBalance
     {
         private static int RecycleMax = 100000;
+
+        private ConcurrentDictionary<string, ConcurrentDictionary<string, WeightedRoundRobin>> methodWeightMap =
+            new ConcurrentDictionary<string, ConcurrentDictionary<string, WeightedRoundRobin>>();
+
+        private long updateLock = 0;
+        
         protected override ServiceNode DoSelect(IList<ServiceNode> serviceNodes)
         {
-            string key = serviceUrls[0].Url;
+            string key = serviceNodes[0].Url;
+            //得到 map
             ConcurrentDictionary<string, WeightedRoundRobin> map = methodWeightMap[key];
             if (map == null)
             {
                 methodWeightMap.TryAdd(key, new ConcurrentDictionary<string, WeightedRoundRobin>());
                 map = methodWeightMap[key];
             }
+            
+            //初始化变量
             int totalWeight = 0;
-            long maxCurrent = long.MaxValue;
+            long maxCurrent = long.MinValue;
             long now = DateTime.Now.ToFileTimeUtc();
             ServiceNode serviceUrl = null;
             WeightedRoundRobin selectedWRR = null;
-            foreach (ServiceNode url in serviceUrls)
+            
+            //循环处理所有的nodes
+            foreach (ServiceNode node in serviceNodes)
             {
-                string identifyString = url.Url;
+                //初始化map中的 WeightedRoundRobin 对象
+                string identifyString = node.Url;
                 WeightedRoundRobin weightedRoundRobin = map[identifyString];
                 int weight = GetWeight();
                 if (weight < 0)
@@ -39,9 +51,10 @@ namespace Microsoft.Streamye.Cores.LoadBalance
                     map.TryAdd(identifyString, weightedRoundRobin);
                     weightedRoundRobin = map[identifyString];
                 }
+                
+                //weight changed
                 if (weight != weightedRoundRobin.GetWeight())
                 {
-                    //weight changed
                     weightedRoundRobin.SetWeight(weight);
                 }
                 long cur = weightedRoundRobin.IncreaseCurrent();
@@ -49,14 +62,16 @@ namespace Microsoft.Streamye.Cores.LoadBalance
                 if (cur > maxCurrent)
                 {
                     maxCurrent = cur;
-                    serviceUrl = url;
+                    serviceUrl = node;
                     selectedWRR = weightedRoundRobin;
                 }
                 totalWeight += weight;
             }
-            if (!updateLock.get() && serviceUrls.Count != map.Count)
+            
+            
+            if (Interlocked.Read(ref updateLock)!=0 && serviceNodes.Count != map.Count)
             {
-                if (updateLock.compareAndSet(false, true))
+                if (Interlocked.CompareExchange(ref updateLock,1,0) == 1)
                 {
                     try
                     {
@@ -67,7 +82,7 @@ namespace Microsoft.Streamye.Cores.LoadBalance
                         while (it.MoveNext())
                         {
                             
-                            if (now - newMap[it.Current].GetLastUpdate() > RECYCLE_PERIOD)
+                            if (now - newMap[it.Current].GetLastUpdate() > RecycleMax)
                             {
                                 it.Dispose();
                             }
@@ -76,17 +91,17 @@ namespace Microsoft.Streamye.Cores.LoadBalance
                     }
                     finally
                     {
-                        updateLock.set(false);
+                        Interlocked.Add(ref updateLock, -1);
                     }
                 }
             }
             if (serviceUrl != null)
             {
-                selectedWRR.Sel(totalWeight);
+                selectedWRR.DecreaseCurrent(totalWeight);
                 return serviceUrl;
             }
             // should not happen here
-            return serviceUrls[0];
+            return serviceNodes[0];
         }
     }
 }
