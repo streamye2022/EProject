@@ -5,4 +5,14 @@
         <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Controllers" />
+      <Folder Include="dtos" />
+      <Folder Include="Services\SeckillService" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Microsoft.Streamye.Cores\Microsoft.Streamye.Cores.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Specialized;
 using System.Runtime.Serialization;
+using Microsoft.Streamye.Commons;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
@@ -10,6 +11,13 @@ namespace Microsoft.Streamye.UnitTests
     [TestClass]
     public class UnitTest1
     {
+        
+        [TestMethod]
+        public void TestApiVersionConfigHelpers()
+        {
+            Console.WriteLine(ApiVersionConfigHelpers.ArmAPIVersion);
+        }
+        
         [TestMethod]
         public void TestMethod1()
         {
