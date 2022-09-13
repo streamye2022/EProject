@@ -10,6 +10,7 @@ namespace Microsoft.Streamye.Cores.Middleware
         public Task<MiddleResult> PostAsync(string middleUrl, IDictionary<string, object> middleParam);
         
         public Task<MiddleResult> PostAsync(string middleUrl, IList<IDictionary<string, object>> middleParams);
+        public Task<MiddleResult> PostDynamicAsync(string middleUrl, dynamic middleParam);
         
         public Task<MiddleResult> DeleteAsync(string middleUrl, IDictionary<string, object> middleParam);
         

@@ -11,7 +11,6 @@ namespace Microsoft.Streamye.Cores.Middleware
 {
     public class HttpMiddleService : IMiddleService
     {
-
         private IHttpClientFactory _clientFactory;
         private const string httpConst = "micro";
 
@@ -37,7 +36,8 @@ namespace Microsoft.Streamye.Cores.Middleware
             HttpClient httpClient = _clientFactory.CreateClient(httpConst);
 
             // 2、转换成json参数
-            HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(middleParam), Encoding.UTF8, "application/json");
+            HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(middleParam), Encoding.UTF8,
+                "application/json");
 
             // 3、Post请求
             HttpResponseMessage httpResponseMessage = await httpClient.PostAsync(middleUrl, httpContent);
@@ -51,7 +51,23 @@ namespace Microsoft.Streamye.Cores.Middleware
             HttpClient httpClient = _clientFactory.CreateClient(httpConst);
 
             // 2、转换成json参数
-            HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(middleParams), Encoding.UTF8, "application/json");
+            HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(middleParams), Encoding.UTF8,
+                "application/json");
+
+            // 3、Post请求
+            HttpResponseMessage httpResponseMessage = await httpClient.PostAsync(middleUrl, httpContent);
+
+            return await getMiddleResult(httpResponseMessage);
+        }
+
+        public async Task<MiddleResult> PostDynamicAsync(string middleUrl, dynamic middleParam)
+        {
+            // 1、获取httpClient
+            HttpClient httpClient = _clientFactory.CreateClient(httpConst);
+
+            // 2、转换成json参数
+            HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(middleParam), Encoding.UTF8,
+                "application/json");
 
             // 3、Post请求
             HttpResponseMessage httpResponseMessage = await httpClient.PostAsync(middleUrl, httpContent);
@@ -76,7 +92,8 @@ namespace Microsoft.Streamye.Cores.Middleware
             HttpClient httpClient = _clientFactory.CreateClient(httpConst);
 
             // 2、转换成json参数
-            HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(middleParam), Encoding.UTF8, "application/json");
+            HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(middleParam), Encoding.UTF8,
+                "application/json");
             // 3、Put请求
             HttpResponseMessage httpResponseMessage = await httpClient.PutAsync(middleUrl, httpContent);
 
@@ -89,7 +106,8 @@ namespace Microsoft.Streamye.Cores.Middleware
             HttpClient httpClient = _clientFactory.CreateClient(httpConst);
 
             // 2、转换成json参数
-            HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(middleParams), Encoding.UTF8, "application/json");
+            HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(middleParams), Encoding.UTF8,
+                "application/json");
 
             // 3、Put请求
             HttpResponseMessage httpResponseMessage = await httpClient.PutAsync(middleUrl, httpContent);
@@ -100,7 +118,7 @@ namespace Microsoft.Streamye.Cores.Middleware
         private async Task<MiddleResult> getMiddleResult(HttpResponseMessage httpResponseMessage)
         {
             if (httpResponseMessage.StatusCode.Equals(HttpStatusCode.OK) ||
-                httpResponseMessage.StatusCode.Equals(HttpStatusCode.Created)||
+                httpResponseMessage.StatusCode.Equals(HttpStatusCode.Created) ||
                 httpResponseMessage.StatusCode.Equals(HttpStatusCode.Accepted))
             {
                 string httpJsonString = await httpResponseMessage.Content.ReadAsStringAsync();

@@ -1,51 +1,56 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Microsoft.Streamye.Cores.DynamicMiddleware
 {
     public interface IDynamicMiddlewareService
     {
         //dict参数 => 获得单个对象
-        public IDictionary<string, object> Get(string urlSchema, string serviceName, string serviceLink,
+        public Task<IDictionary<string, object>> GetAsync(string urlSchema, string serviceName, string serviceLink,
             IDictionary<string, object> middleParam);
 
-        public dynamic GetDynamic(string urlSchema, string serviceName, string serviceLink,
+        public Task<dynamic> GetDynamicAsync(string urlSchema, string serviceName, string serviceLink,
             IDictionary<string, object> middleParam);
 
-        public T Get<T>(string urlShcme, string serviceName, string serviceLink,
+        public Task<T> GetAsync<T>(string urlSchema, string serviceName, string serviceLink,
             IDictionary<string, object> middleParam)
             where T : new();
 
         //dict参数 => 获得多个对象
-        public IList<IDictionary<string, object>> GetList(string urlSchema, string serviceName, string serviceLink,
+        public Task<IList<IDictionary<string, object>>> GetListAsync(string urlSchema, string serviceName,
+            string serviceLink,
             IDictionary<string, object> middleParam);
 
-        public IList<T> GetList<T>(string urlSchema, string serviceName, string serviceLink,
+        public Task<IList<T>> GetListAsync<T>(string urlSchema, string serviceName, string serviceLink,
             IDictionary<string, object> middleParam)
             where T : new();
 
         // post
-        public void Post(string urlShcme, string serviceName, string serviceLink,
+        public Task PostAsync(string urlSchema, string serviceName, string serviceLink,
             IDictionary<string, object> middleParam);
+
         // post 参数为dynamic的
-        public dynamic PostDynamic(string urlShcme, string serviceName, string serviceLink, dynamic middleParam);
+        public Task PostDynamicAsync(string urlSchema, string serviceName, string serviceLink, dynamic middleParam);
+
         // post 参数是list的
-        public void Post(string urlShcme, string serviceName, string serviceLink,
+        public Task PostAsync(string urlSchema, string serviceName, string serviceLink,
             IList<IDictionary<string, object>> middleParams);
 
-        //删除请求
-        public void Delete(string urlShcme, string serviceName, string serviceLink,
-            IDictionary<string, object> middleParam);
-        
-        public dynamic DeleteDynamic(string urlShcme, string serviceName, string serviceLink,
+        // Delete 删除请求
+        public Task DeleteAsync(string urlSchema, string serviceName, string serviceLink,
             IDictionary<string, object> middleParam);
 
+        // public Task<dynamic> DeleteDynamicAsync(string urlSchema, string serviceName, string serviceLink,
+        //     IDictionary<string, object> middleParam);
+
         // PUT
-        public void Put(string urlShcme, string serviceName, string serviceLink,
+        public Task PutAsync(string urlSchema, string serviceName, string serviceLink,
             IDictionary<string, object> middleParam);
-        
-        public dynamic PutDynamic(string urlShcme, string serviceName, string serviceLink, dynamic middleParam);
-        
-        public void Put(string urlShcme, string serviceName, string serviceLink,
+
+        // public Task<dynamic> PutDynamicAsync(string urlSchema, string serviceName, string serviceLink,
+        //     dynamic middleParam);
+
+        public Task PutAsync(string urlSchema, string serviceName, string serviceLink,
             IList<IDictionary<string, object>> middleParams);
     }
 }
