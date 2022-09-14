@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Streamye.Cores.DynamicMiddleware;
 
-namespace Microsoft.Streamye.SecKillServices.Services
+namespace Microsoft.Streamye.SeckillAggregateServices.Services
 {
     public class SeckillService
     {

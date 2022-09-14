@@ -1,4 +1,4 @@
-namespace Microsoft.Streamye.SecKillServices.Services
+namespace Microsoft.Streamye.SeckillAggregateServices.Services
 {
     public class SeckillConstant
     {

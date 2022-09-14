@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Microsoft.Streamye.SecKillServices.Models.SeckillService
+namespace Microsoft.Streamye.SeckillAggregateServices.Models.SeckillModel
 {
     public class SeckillRecord
     {

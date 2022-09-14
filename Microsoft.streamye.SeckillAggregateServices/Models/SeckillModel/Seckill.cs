@@ -1,4 +1,4 @@
-namespace Microsoft.Streamye.SecKillServices.Models.SeckillService
+namespace Microsoft.Streamye.SeckillAggregateServices.Models.SeckillModel
 {
     public class Seckill
     {

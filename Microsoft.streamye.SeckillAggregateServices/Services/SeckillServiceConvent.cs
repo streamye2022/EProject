@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Microsoft.Streamye.SecKillServices.Models.SeckillService;
+using Microsoft.Streamye.SeckillAggregateServices.Models.SeckillModel;
 
-namespace Microsoft.Streamye.SecKillServices.Services
+namespace Microsoft.Streamye.SeckillAggregateServices.Services
 {
     public class SeckillServiceConvent
     {

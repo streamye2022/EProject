@@ -6,13 +6,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="MicroServices" />
-      <Folder Include="Models" />
+      <ProjectReference Include="..\Microsoft.Streamye.Commons\Microsoft.Streamye.Commons.csproj" />
+      <ProjectReference Include="..\Microsoft.Streamye.Cores\Microsoft.Streamye.Cores.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Microsoft.Streamye.Commons\Microsoft.Streamye.Commons.csproj" />
-      <ProjectReference Include="..\Microsoft.Streamye.Cores\Microsoft.Streamye.Cores.csproj" />
+      <Folder Include="Services\SeckillService" />
     </ItemGroup>
 
 </Project>
