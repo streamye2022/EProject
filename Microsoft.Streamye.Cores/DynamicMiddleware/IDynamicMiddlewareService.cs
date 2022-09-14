@@ -40,15 +40,15 @@ namespace Microsoft.Streamye.Cores.DynamicMiddleware
         public Task DeleteAsync(string urlSchema, string serviceName, string serviceLink,
             IDictionary<string, object> middleParam);
 
-        // public Task<dynamic> DeleteDynamicAsync(string urlSchema, string serviceName, string serviceLink,
-        //     IDictionary<string, object> middleParam);
+        public Task<dynamic> DeleteDynamicAsync(string urlSchema, string serviceName, string serviceLink,
+            IDictionary<string, object> middleParam);
 
         // PUT
         public Task PutAsync(string urlSchema, string serviceName, string serviceLink,
             IDictionary<string, object> middleParam);
 
-        // public Task<dynamic> PutDynamicAsync(string urlSchema, string serviceName, string serviceLink,
-        //     dynamic middleParam);
+        public Task<dynamic> PutDynamicAsync(string urlSchema, string serviceName, string serviceLink,
+            dynamic middleParam);
 
         public Task PutAsync(string urlSchema, string serviceName, string serviceLink,
             IList<IDictionary<string, object>> middleParams);

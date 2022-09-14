@@ -153,7 +153,22 @@ namespace Microsoft.Streamye.Cores.DynamicMiddleware
             //不用try catch ,不断往上抛就可以了
             IsSuccess(middleResult);
         }
-        
+
+        public async Task<dynamic> DeleteDynamicAsync(string urlSchema, string serviceName, string serviceLink, IDictionary<string, object> middleParam)
+        {
+            //获得url
+            var targetUrl = await _dynamicUrl.GetMiddleUrlAsync(urlSchema, serviceName);
+
+            //获得get结果
+            MiddleResult middleResult = await _middleService.DeleteAsync(targetUrl + serviceLink, middleParam);
+
+            //判断结果
+            //不用try catch ,不断往上抛就可以了
+            IsSuccess(middleResult);
+
+            return middleResult.Result;
+        }
+
         public async Task PutAsync(string urlSchema, string serviceName, string serviceLink,
             IDictionary<string, object> middleParam)
         {
@@ -166,6 +181,21 @@ namespace Microsoft.Streamye.Cores.DynamicMiddleware
             //判断结果
             //不用try catch ,不断往上抛就可以了
             IsSuccess(middleResult);
+        }
+
+        public async Task<dynamic> PutDynamicAsync(string urlSchema, string serviceName, string serviceLink, dynamic middleParam)
+        {
+            //获得url
+            var targetUrl = await _dynamicUrl.GetMiddleUrlAsync(urlSchema, serviceName);
+
+            //获得get结果
+            MiddleResult middleResult = await _middleService.PutAsync(targetUrl + serviceLink, middleParam);
+
+            //判断结果
+            //不用try catch ,不断往上抛就可以了
+            IsSuccess(middleResult);
+
+            return middleResult.Result;
         }
 
         public async Task PutAsync(string urlSchema, string serviceName, string serviceLink,

@@ -51,12 +51,49 @@ namespace Microsoft.Streamye.Cores.MicroClients
                     //路径变量替换
                     string path = PathParse(getPath.Path, dynamicParams);
                     //调用远端接口
-                    dynamic result = _dynamicMiddlewareService.GetAsync(microClient.UrlSchema, microClient.ServiceName
+                    dynamic result = _dynamicMiddlewareService.GetDynamicAsync(microClient.UrlSchema, microClient.ServiceName
                         , path, dynamicParams);
 
                     //返回值转换成 methodinfo中的返回值
                     Type returnType = methodInfo.ReturnType;
                     invocation.ReturnValue = ResultConvert(result, returnType);
+                }else if (attribute is PostPath postPath)
+                {
+                    //路径变量替换
+                    string path = PathParse(postPath.Path, dynamicParams);
+                    //调用远端接口
+                    dynamic result = _dynamicMiddlewareService.PostDynamicAsync(microClient.UrlSchema, microClient.ServiceName
+                        , path, dynamicParams);
+
+                    //返回值转换成 methodinfo中的返回值
+                    Type returnType = methodInfo.ReturnType;
+                    invocation.ReturnValue = ResultConvert(result, returnType);
+                }else if (attribute is PutPath putPath)
+                {
+                    //路径变量替换
+                    string path = PathParse(putPath.Path, dynamicParams);
+                    //调用远端接口
+                    dynamic result = _dynamicMiddlewareService.PutDynamicAsync(microClient.UrlSchema, microClient.ServiceName
+                        , path, dynamicParams);
+
+                    //返回值转换成 methodinfo中的返回值
+                    Type returnType = methodInfo.ReturnType;
+                    invocation.ReturnValue = ResultConvert(result, returnType);
+                }else if (attribute is DeletePath deletePath)
+                {
+                    //路径变量替换
+                    string path = PathParse(deletePath.Path, dynamicParams);
+                    //调用远端接口
+                    dynamic result = _dynamicMiddlewareService.DeleteDynamicAsync(microClient.UrlSchema, microClient.ServiceName
+                        , path, dynamicParams);
+
+                    //返回值转换成 methodinfo中的返回值
+                    Type returnType = methodInfo.ReturnType;
+                    invocation.ReturnValue = ResultConvert(result, returnType);
+                }
+                else
+                {
+                    throw new FrameException("attribute is not exist");
                 }
             }
         }
