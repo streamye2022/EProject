@@ -5,4 +5,13 @@
         <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Dtos\Output" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Microsoft.Streamye.Commons\Microsoft.Streamye.Commons.csproj" />
+      <ProjectReference Include="..\Microsoft.Streamye.Cores\Microsoft.Streamye.Cores.csproj" />
+    </ItemGroup>
+
 </Project>
