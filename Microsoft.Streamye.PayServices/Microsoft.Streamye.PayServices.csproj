@@ -5,4 +5,15 @@
         <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Dtos\Outputs" />
+      <Folder Include="Payments\AliPay" />
+      <Folder Include="Payments\WxPay" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Microsoft.Streamye.Commons\Microsoft.Streamye.Commons.csproj" />
+      <ProjectReference Include="..\Microsoft.Streamye.Cores\Microsoft.Streamye.Cores.csproj" />
+    </ItemGroup>
+
 </Project>
