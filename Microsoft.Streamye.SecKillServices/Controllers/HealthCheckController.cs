@@ -11,6 +11,6 @@ namespace Microsoft.Streamye.SecKillServices.Controllers
         public ActionResult GetHealthCheck()
         {
             return Ok("连接正常");
-        }
+        } 
     }
 }
