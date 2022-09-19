@@ -5,13 +5,13 @@ using Microsoft.Streamye.Cores.DynamicMiddleware;
 
 namespace Microsoft.Streamye.SeckillAggregateServices.Services
 {
-    public class SeckillService
+    public class SeckillService1
     {
         private string scheme = "http";
         private string serviceName = "SeckillService";
         private IDynamicMiddlewareService _dynamicMiddlewareService;
 
-        public SeckillService(IDynamicMiddlewareService dynamicMiddlewareService)
+        public SeckillService1(IDynamicMiddlewareService dynamicMiddlewareService)
         {
             _dynamicMiddlewareService = dynamicMiddlewareService;
         }

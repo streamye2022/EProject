@@ -10,8 +10,4 @@
       <ProjectReference Include="..\Microsoft.Streamye.Cores\Microsoft.Streamye.Cores.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Services\SeckillService" />
-    </ItemGroup>
-
 </Project>

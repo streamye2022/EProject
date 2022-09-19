@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Streamye.PayServices.Dtos.Inputs;
 using Microsoft.Streamye.PayServices.Models;
+using Microsoft.Streamye.PayServices.Payments;
 using Microsoft.Streamye.PayServices.Services;
 
 
@@ -20,13 +21,14 @@ namespace Microsoft.Streamye.PayServices.Controllers
         private readonly IPaymentService PaymentService;
 
         // 微信支付客户端, 支付宝网页支付客户端 => 支付工厂 => 支付facade
-        private WebPagePayFacade _webPagePayFacade; // 统一支付外观
+        // private WebPagePayFacade _webPagePayFacade; // 统一支付外观
 
-        public PaymentController(IPaymentService PaymentService,
-            WebPagePayFacade webPagePayFacade)
+        public PaymentController(IPaymentService PaymentService
+            //WebPagePayFacade webPagePayFacade
+            )
         {
             this.PaymentService = PaymentService;
-            _webPagePayFacade = webPagePayFacade;
+            //_webPagePayFacade = webPagePayFacade;
         }
 
 
@@ -89,11 +91,12 @@ namespace Microsoft.Streamye.PayServices.Controllers
         public async Task<ActionResult<WebPagePayResult>> PostCombinePayment(PaymentCreateDto paymentCreateDto)
         {
             // 外观模式选择支付
-            WebPagePayResult webPagePayResult = _webPagePayFacade.CreatePay
-            (paymentCreateDto.PaymentType,
-                paymentCreateDto.ProductName,
-                paymentCreateDto.OrderSn,
-                paymentCreateDto.OrderTotalPrice);
+            WebPagePayResult webPagePayResult = null;
+            //     _webPagePayFacade.CreatePay
+            // (paymentCreateDto.PaymentType,
+            //     paymentCreateDto.ProductName,
+            //     paymentCreateDto.OrderSn,
+            //     paymentCreateDto.OrderTotalPrice);
 
             return webPagePayResult;
         }
