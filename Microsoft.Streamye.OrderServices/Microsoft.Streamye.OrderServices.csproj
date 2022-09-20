@@ -6,12 +6,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Dtos\Output" />
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.2"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Microsoft.Streamye.Commons\Microsoft.Streamye.Commons.csproj" />
-      <ProjectReference Include="..\Microsoft.Streamye.Cores\Microsoft.Streamye.Cores.csproj" />
+        <ProjectReference Include="..\Microsoft.Streamye.Commons\Microsoft.Streamye.Commons.csproj"/>
+        <ProjectReference Include="..\Microsoft.Streamye.Cores\Microsoft.Streamye.Cores.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Dtos\Output"/>
     </ItemGroup>
 
 </Project>

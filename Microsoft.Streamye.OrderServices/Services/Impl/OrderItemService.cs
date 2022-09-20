@@ -7,7 +7,7 @@ using Microsoft.Streamye.OrderServices.Repositories;
 
 namespace Microsoft.Streamye.OrderServices.Services.Impl
 {
-    public class OrderItemService
+    public class OrderItemService : IOrderItemService
     {
         public IOrderItemRepository OrderItemRepository;
 
