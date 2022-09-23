@@ -7,29 +7,34 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Streamye.Commons.CommonResults;
+using Microsoft.Streamye.Commons.Exceptions.Handlers;
+using Microsoft.Streamye.Commons.ModelBinds.Users;
 using Microsoft.Streamye.Cores.Middleware.Extensions;
+using Newtonsoft.Json.Serialization;
 
 namespace Microsoft.Streamye.SeckillAggregateServices
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
+         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddMiddlewareServices(middlewareOptions =>
             {
                 middlewareOptions.HttpClientName = "seckill aggregate service";
-                middlewareOptions.pollyHttpClientOptions = pollyOptions =>
-                {
-                    pollyOptions.RetryCount = 3;
-                };
+                middlewareOptions.pollyHttpClientOptions = pollyOptions => { pollyOptions.RetryCount = 3; };
             });
-            
+
+            services.AddControllers(options =>
+            {
+                options.Filters.Add<AggregateCommonResultHandler>();
+                options.Filters.Add<BizExceptionHandler>();
+                options.ModelBinderProviders.Insert(0, new SysUserModelBinderProvider());
+            }).AddNewtonsoftJson(options => {
+                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+            });;
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
