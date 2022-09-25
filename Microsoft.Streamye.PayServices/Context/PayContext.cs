@@ -5,7 +5,7 @@ namespace Microsoft.Streamye.PayServices.Context
 {
     public class PayContext : DbContext
     {
-        public PayContext(DbContextOptions options) : base(options)
+        public PayContext(DbContextOptions<PayContext> options) : base(options)
         {
         }
 

@@ -5,7 +5,7 @@ namespace Microsoft.Streamye.SecKillServices.Context
 {
     public class SeckillContext : DbContext
     {
-        public SeckillContext(DbContextOptions options) : base(options)
+        public SeckillContext(DbContextOptions<SeckillContext> options) : base(options)
         {
         }
 

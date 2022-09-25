@@ -5,7 +5,7 @@ namespace Microsoft.Streamye.UserServices.Context
 {
     public class UserContext : DbContext
     {
-        public UserContext(DbContextOptions options) : base(options)
+        public UserContext(DbContextOptions<UserContext> options) : base(options)
         {
         }
 

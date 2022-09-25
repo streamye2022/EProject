@@ -5,7 +5,7 @@ namespace Microsoft.Streamye.OrderServices.Context
 {
     public class OrderContext : DbContext
     {
-        public OrderContext(DbContextOptions options) : base(options)
+        public OrderContext(DbContextOptions<OrderContext> options) : base(options)
         {
         }
 
